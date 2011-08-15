@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	
+	<name>Utilities</name>
+	<groupId>bhaskar.utilities</groupId>
+	<artifactId>utilities</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>jar</packaging>
+	<version>1.0.0</version>
+	<description>All the generic utilities developed go inside this project</description>
+	
+	<properties>
+		<target.dir>${env.TARGET_DIR}/target/${artifactId}</target.dir>
+		<artifact.name>${artifactId}</artifact.name>
+        <java.mail.version>1.4</java.mail.version>
+        
+        <!-- Logging Dependency -->
+        <log4j.version>1.2.15</log4j.version>
+    </properties>
+
+    <developers>
+        <developer>
+        <id>bhaskar.aries</id>
+        <name>Bhaskar Das</name>
+        <email>bhaskar.aries@gmail.com, bhaskar.das@email.com</email>
+        <roles>
+        <role>All</role>
+        </roles>
+        <organization>Freelance</organization>
+        <timezone>+5.5</timezone>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>${java.mail.version}</version>
+        </dependency>
+        
+        <!-- Logging Dependency -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+    </dependencies>
+    
+    <repositories>
+		<repository>
+      		<id>central</id>
+      		<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+    	<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+    	</pluginRepository>
+	</pluginRepositories>
+
+    <build>
+        <finalName>${artifact.name}</finalName>
+        <directory>${target.dir}</directory>
+        <testOutputDirectory>${target.dir}/test-classes</testOutputDirectory>
+        <sourceDirectory>${basedir}/src/main/java/</sourceDirectory>
+        <testSourceDirectory>${basedir}/src/test/java/</testSourceDirectory>
+        <outputDirectory>${target.dir}/classes</outputDirectory>
+        <resources>
+            <resource>
+                <directory>${basedir}/src/main/resources/org/utilities/config</directory>
+                <excludes>
+                    <exclude>
+                        **/master-config.properties
+                    </exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>${basedir}/src/test/resources</directory>
+            </testResource>
+        </testResources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+					<debug>true</debug>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
+                </configuration>
+            </plugin>
+       </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <show>package</show>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.0.4</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>2.4.3</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>report-only</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>
